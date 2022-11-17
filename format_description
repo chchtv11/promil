@@ -1,0 +1,18 @@
+output_list = []
+
+if 'description' in input_data:
+    item_list = input_data['item'].split(',')
+    description_list = input_data['description'].split(',')
+    quantity_list = input_data['quantity'].split(',')
+    
+
+    for index, item in enumerate(item_list):
+        if item == 'null':
+            break
+        description = description_list[index]
+        if '-' in description:
+            description = "\n\t\t-".join(description.split('-'))
+        line = "\n- **Item**: {item_name}\n\t- **Quantity**: {qty}\n\t- **Description**:\n\t\t{desc}".format(item_name = item, qty = quantity_list[index], desc = description)
+        output_list.append(line)
+        
+output = {'items': "\n".join(output_list)}
